@@ -20,25 +20,26 @@ public class Main {
 	public static Vector<Vector<Vector<Integer>>> lcsCompareGroup = new Vector<Vector<Vector<Integer>>>();
 	public static Vector<Vector<Vector<Vector<Integer>>>> sCompareGroup = new Vector<Vector<Vector<Vector<Integer>>>>();
 	
+	// 메인 함수
 	public static void main(String[] args) {
 		
 		// 1 : 변수 선언 및 초기화
 		Scanner scan = new Scanner(System.in);
-		int cflag = 0;		// 판정 기준 및 모드
+		int cflag = 0;		// 그룹화 판정 기준 및 모드
 		int oflag = 0;		// 비교 대상
 		int appNumber = 0;	// 앱의 수
-		Vector<Vector<String>> appLogFileGroup = new Vector<Vector<String>>(); // 앱의 로그파일 그룹
+		Vector<Vector<String>> appLogFileGroup = new Vector<Vector<String>>(); // 앱의 로그엑셀파일 이름을 저장
 		
 		// 2 : 프로그램 반복 실행
 		while(true){		
 			
 			// 2-1 : 판정 기준 선택
-			System.out.println("======= 판정 기준 선택 =======");		
+			System.out.println("======= 그룹화 판정 기준 선택 =======");		
 			System.out.println("1. 유사도 / 자동");
 			System.out.println("2. 유사도 / 사용자지정");
 			System.out.println("3. LCS 비교");
-			System.out.println("4. (추가)결과테이블 출력 모드");
-			System.out.println("===========================");
+			System.out.println("4. (추가) 결과테이블 출력 모드");
+			System.out.println("=============================");
 			System.out.print("번호를 선택해주세요 (종료 -1) : ");
 			cflag = scan.nextInt();
 			scan.nextLine();
@@ -237,6 +238,7 @@ public class Main {
 		scan.close();		
 	}
 	
+	// 엑셀 파일 입력, 문자열 비교 및 관련 데이터 저장 함수
 	public static List readFile(Vector<String> appLogFile, int oflag){
 		
 		/*
@@ -507,7 +509,7 @@ public class Main {
 		return list;
 	}
 	
-	// 문자열 생성 함수
+	// 문자열 생성 함수 *
 	private static String saveString(int oflag, XSSFWorkbook workbook, int startRow, int failLength) {
 		
 		XSSFSheet sheet = workbook.getSheetAt(0);
@@ -643,7 +645,7 @@ public class Main {
 		
 	}
 
-	// LCS 생성 함수 : LCS Algorithm
+	// LCS 생성 함수 : LCS Algorithm *
 	private static String compareString(int m, int n, String A, String B){
 		
 		// ===================================================================== //
@@ -720,7 +722,7 @@ public class Main {
 		
 	}
 	
-	// LCS 길이 생성 함수 : LCS Algorithm
+	// LCS 길이 생성 함수 : LCS Algorithm *
 	private static void compare(int m, int n, String A, String B, int[] LL){
 		
 		int [][] K = new int [2][n+1];
@@ -752,7 +754,7 @@ public class Main {
 		
 	}
 
-	// 문자열 리버스 함수
+	// 문자열 리버스 함수 : LCS Algorithm *
 	public static String reverse(String S){
 		
 		StringBuffer a = new StringBuffer();
@@ -764,7 +766,7 @@ public class Main {
 		return a.toString();
 	}
 	
-	// 결과 및 로그 파일 출력 함수
+	// 결과 도출 및 로그 엑셀 파일 출력 함수
 	private static void writeFile(Vector<String> appLogFile, int cflag, int oflag, List list) {
 		
 		Vector<Vector<Integer>> print = new Vector<Vector<Integer>>();
@@ -866,7 +868,7 @@ public class Main {
 		// 3 : 판단 기준 : LCS 비교																											 //
 		//============================================================================================================================== //
 		
-		if(cflag==-3){ // 잠깐 다시넣음 // W,E비교시 에러 로그 많은 앱때문에 뺐어(일시적)
+		if(cflag==-3){
 			
 			// LCS 비교를 위한 준비 //
 			Vector<String> lcsVector = new Vector<String>();
